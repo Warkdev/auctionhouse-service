@@ -19,6 +19,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import eu.getmangos.dto.AuctionDTO;
+import eu.getmangos.dto.MessageDTO;
 
 public interface AuctionResource {
 
@@ -40,7 +41,7 @@ public interface AuctionResource {
     public Response findAllAuctions(@QueryParam("page") Integer page, @QueryParam("page_size") Integer pageSize);
 
     @GET
-    @Path("/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Retrieves an auction from the database.",
         description = "This API is returning the matching auction from the database."
@@ -59,7 +60,7 @@ public interface AuctionResource {
     public Response findAuction(@PathParam("id") int id);
 
     @GET
-    @Path("/auction_house/{auction_house_id}")
+    @Path("auction_house/{auction_house_id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Retrieves a paginable view of the auctions at a given Auction House.",
         description = "This API is returning the matching auctions from the database."
@@ -77,7 +78,7 @@ public interface AuctionResource {
     public Response findForAuctionHouse(@PathParam("auction_house_id") int houseId, @QueryParam("page") Integer page, @QueryParam("page_size") Integer pageSize);
 
     @GET
-    @Path("/owner/{owner_id}")
+    @Path("owner/{owner_id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Retrieves a paginable view of the auctions for a given owner.",
         description = "This API is returning the matching auctions from the database."
@@ -102,7 +103,9 @@ public interface AuctionResource {
     )
     @APIResponses(
         value = {
-            @APIResponse(responseCode = "201", description = "The auction has been created"),
+            @APIResponse(responseCode = "201", description = "The auction has been created", content = @Content(
+                mediaType = "application/json", schema = @Schema(implementation = MessageDTO.class))
+            ),
             @APIResponse(responseCode = "400", description = "Error with the request"),
             @APIResponse(responseCode = "500", description = "An unexpected event occured")
         }
@@ -110,14 +113,16 @@ public interface AuctionResource {
     public Response createAuction(AuctionDTO entity);
 
     @PUT
-    @Path("/{id}")
+    @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Updates an auction within the database.",
         description = "This API is updating a new auction within the database."
     )
     @APIResponses(
         value = {
-            @APIResponse(responseCode = "200", description = "The auction has been updated"),
+            @APIResponse(responseCode = "200", description = "The auction has been updated", content = @Content(
+                mediaType = "application/json", schema = @Schema(implementation = MessageDTO.class))
+            ),
             @APIResponse(responseCode = "400", description = "Error with the request"),
             @APIResponse(responseCode = "500", description = "An unexpected event occured")
         }
@@ -132,7 +137,7 @@ public interface AuctionResource {
     @APIResponses(
         value = {
             @APIResponse(responseCode = "204", description = "The auction has been deleted", content = @Content(
-                        mediaType = "application/json"
+                        mediaType = "application/json", schema = @Schema(implementation = MessageDTO.class)
                 )
             ),
             @APIResponse(responseCode = "400", description = "Error with the request"),

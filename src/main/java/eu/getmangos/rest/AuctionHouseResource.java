@@ -1,5 +1,6 @@
 package eu.getmangos.rest;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -16,7 +17,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import eu.getmangos.dto.AuctionHouseDTO;
-import eu.getmangos.dto.Locale;
+import eu.getmangos.dto.MessageDTO;
+import eu.getmangos.dto.TranslationDTO;
 
 public interface AuctionHouseResource {
 
@@ -76,16 +78,17 @@ public interface AuctionHouseResource {
 
     @PUT
     @Path("translate/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Updates the translation for a given Auction House")
     @APIResponses(
         value = {
             @APIResponse(responseCode = "200", description = "The matching auction house translation has been updated", content = @Content(
-                        mediaType = "application/json"
+                        mediaType = "application/json", schema = @Schema(implementation = MessageDTO.class)
                 )
             ),
             @APIResponse(responseCode = "400", description = "Error with the request"),
             @APIResponse(responseCode = "500", description = "An unexpected event occured")
         }
     )
-    public Response translateAuctionHouse(@PathParam("id") Integer houseId, Locale locale, String translation);
+    public Response translateAuctionHouse(@PathParam("id") Integer houseId, TranslationDTO translation);
 }

@@ -126,7 +126,7 @@ public class AuctionHouseController {
 
     /**
      * Retrieves the list of all auction houses for a given faction house using pagination.
-     * @param houseId The faction ID, see Faction.dbc
+     * @param factionId The factionID see Faction.dbc
      * @param page The page to start from.
      * @param pageSize The amount of results.
      * @return A list of auction houses starting at the given page.
@@ -151,6 +151,13 @@ public class AuctionHouseController {
         return list;
     }
 
+    /**
+     * Updates the translation for a given auction house.
+     * @param houseId The Auction House Id.
+     * @param locale The locale for which this translation applies.
+     * @param translation The translation to register in the database.
+     */
+    @Transactional
     public void updateTranslation(Integer houseId, Locale locale, String translation) throws DAOException {
         logger.debug("updateTranslation() entry.");
 
@@ -164,7 +171,7 @@ public class AuctionHouseController {
             throw new DAOException("Auction House does not exist");
         }
 
-        em.createQuery("UPDATE AuctionHouse a SET Name"+locale.loc+" = :translation WHERE a.auctionHouseId = :houseId")
+        em.createQuery("UPDATE AuctionHouse a SET a.name"+locale.loc+" = :translation WHERE a.auctionHouseId = :houseId")
             .setParameter("translation", translation)
             .setParameter("houseId", houseId).executeUpdate();
 

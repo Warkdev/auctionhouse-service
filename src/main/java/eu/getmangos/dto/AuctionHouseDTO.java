@@ -25,25 +25,25 @@ public class AuctionHouseDTO {
   private String name;
 
   @Schema(description = "The localised Korean version of the auction house.")
-  private String nameOne;
+  private String name1;
 
   @Schema(description = "The localised French version of the auction house.")
-  private String nameTwo;
+  private String name2;
 
   @Schema(description = "The localised German version of the auction house.")
-  private String nameThree;
+  private String name3;
 
   @Schema(description = "The localised Chinese version of the auction house.")
-  private String nameFour;
+  private String name4;
 
   @Schema(description = "The localised Taiwanese version of the auction house.")
-  private String nameFive;
+  private String name5;
 
   @Schema(description = "The localised Spanish (Traditional) version of the auction house.")
-  private String nameSix;
+  private String name6;
 
   @Schema(description = "The localised Spanish (Latin America) version of the auction house.")
-  private String nameSeven;
+  private String name7;
 
   @Schema(description = "A checksum value for the preceeding text fields.")
   private Float checksum;

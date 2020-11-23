@@ -11,7 +11,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @ApplicationPath("/auctionhouse")
 @OpenAPIDefinition(
     tags = {
-        @Tag(name = "auction", description="Operations about Auction House")
+        @Tag(name = "auction", description="Operations about Auctions"),
+        @Tag(name = "auctionhouse", description="Operations about Auction Houses")
     },
     externalDocs = @ExternalDocumentation(
         description = "Instructions on how to deploy this WebApp",

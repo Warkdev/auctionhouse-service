@@ -14,12 +14,13 @@ import org.slf4j.Logger;
 import eu.getmangos.controllers.AuctionController;
 import eu.getmangos.controllers.DAOException;
 import eu.getmangos.dto.AuctionDTO;
+import eu.getmangos.dto.MessageDTO;
 import eu.getmangos.entities.Auction;
 import eu.getmangos.mapper.AuctionMapper;
 import eu.getmangos.rest.AuctionResource;
 
 @RequestScoped
-@Path("/v1")
+@Path("auction/v1/")
 @Tag(name = "auction")
 public class AuctionResourceService implements AuctionResource {
 
@@ -94,7 +95,7 @@ public class AuctionResourceService implements AuctionResource {
             }
         } catch(DAOException dao) {
             logger.debug("findForAuctionHouse() exit.");
-            return Response.status(500).build();
+            return Response.status(400).entity(new MessageDTO(dao.getMessage())).build();
         }
 
         logger.debug("findForAuctionHouse() exit.");
@@ -126,7 +127,7 @@ public class AuctionResourceService implements AuctionResource {
             }
         } catch(DAOException dao) {
             logger.debug("findForOwner() exit.");
-            return Response.status(500).build();
+            return Response.status(400).entity(new MessageDTO(dao.getMessage())).build();
         }
 
         logger.debug("findForOwner() exit.");
@@ -139,9 +140,9 @@ public class AuctionResourceService implements AuctionResource {
         try {
             this.auctionController.create(auctionMapper.dtoToEntity(entity));
         } catch (DAOException daoEx) {
-                return Response.status(400).entity(daoEx.getMessage()).build();
+                return Response.status(400).entity(new MessageDTO(daoEx.getMessage())).build();
         } catch (Exception ex) {
-                return Response.status(500).entity(ex.getMessage()).build();
+                return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
         return Response.status(201).entity("Auction has been created.").build();
     }
@@ -153,9 +154,9 @@ public class AuctionResourceService implements AuctionResource {
             auction.setId(auctionId);
             this.auctionController.update(auction);
         } catch (DAOException daoEx) {
-                return Response.status(400).entity(daoEx.getMessage()).build();
+                return Response.status(400).entity(new MessageDTO(daoEx.getMessage())).build();
         } catch (Exception ex) {
-                return Response.status(500).entity(ex.getMessage()).build();
+                return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
         return Response.status(200).entity("Auction has been updated.").build();
     }
@@ -165,9 +166,9 @@ public class AuctionResourceService implements AuctionResource {
         try {
             this.auctionController.delete(id);
         } catch (DAOException daoEx) {
-                return Response.status(400).entity(daoEx.getMessage()).build();
+                return Response.status(400).entity(new MessageDTO(daoEx.getMessage())).build();
         } catch (Exception ex) {
-                return Response.status(500).entity(ex.getMessage()).build();
+                return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
         return Response.status(204).build();
     }

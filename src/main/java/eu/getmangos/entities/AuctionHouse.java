@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "AuctionHouse")
+@Table(name = "zero_AuctionHouse")
 @NamedQueries({
     @NamedQuery(name = "AuctionHouse.findAll", query = "SELECT a FROM AuctionHouse a"),
-    @NamedQuery(name = "AuctionHouse.findById", query = "SELECT a FROM AuctionHouse a WHERE a.AuctionHouseId = :id"),
-    @NamedQuery(name = "AuctionHouse.findByFactionId", query = "SELECT a FROM AuctionHouse a WHERE a.FactionId = :factionId")
+    @NamedQuery(name = "AuctionHouse.findById", query = "SELECT a FROM AuctionHouse a WHERE a.auctionHouseId = :id"),
+    @NamedQuery(name = "AuctionHouse.findByFactionId", query = "SELECT a FROM AuctionHouse a WHERE a.factionId = :factionId")
 })
 public class AuctionHouse {
 
@@ -43,37 +43,37 @@ public class AuctionHouse {
    * The localised Korean version of the auction house.
    */
   @Column(name = "Name1")
-  private String nameOne;
+  private String name1;
   /**
    * The localised French version of the auction house.
    */
   @Column(name = "Name2")
-  private String nameTwo;
+  private String name2;
   /**
    * The localised German version of the auction house.
    */
   @Column(name = "Name3")
-  private String nameThree;
+  private String name3;
   /**
    * The localised Chinese version of the auction house.
    */
   @Column(name = "Name4")
-  private String nameFour;
+  private String name4;
   /**
    * The localised Taiwanese version of the auction house.
    */
   @Column(name = "Name5")
-  private String nameFive;
+  private String name5;
   /**
    * The localised Spanish (Traditional) version of the auction house.
    */
   @Column(name = "Name6")
-  private String nameSix;
+  private String name6;
   /**
    * The localised (Latin America) version of the auction house.
    */
   @Column(name = "Name7")
-  private String nameSeven;
+  private String name7;
   /**
    * A checksum value for the preceeding text fields.
    */

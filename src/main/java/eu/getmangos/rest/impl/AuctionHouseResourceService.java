@@ -14,14 +14,15 @@ import org.slf4j.Logger;
 import eu.getmangos.controllers.AuctionHouseController;
 import eu.getmangos.controllers.DAOException;
 import eu.getmangos.dto.AuctionHouseDTO;
-import eu.getmangos.dto.Locale;
+import eu.getmangos.dto.MessageDTO;
+import eu.getmangos.dto.TranslationDTO;
 import eu.getmangos.entities.AuctionHouse;
 import eu.getmangos.mapper.AuctionHouseMapper;
 import eu.getmangos.rest.AuctionHouseResource;
 
 @RequestScoped
-@Path("/v1")
-@Tag(name = "auction")
+@Path("auction_house/v1/")
+@Tag(name = "auctionhouse")
 public class AuctionHouseResourceService implements AuctionHouseResource {
 
     @Inject
@@ -107,17 +108,17 @@ public class AuctionHouseResourceService implements AuctionHouseResource {
     }
 
     @Override
-    public Response translateAuctionHouse(Integer houseId, Locale locale, String translation) {
+    public Response translateAuctionHouse(Integer houseId, TranslationDTO translation) {
         logger.debug("translateAuctionHouse() entry.");
 
         try {
-            auctionHouseController.updateTranslation(houseId, locale, translation);
+            auctionHouseController.updateTranslation(houseId, translation.getLocale(), translation.getTranslation());
         } catch (DAOException ex) {
             logger.debug("translateAuctionHouse() exit.");
-            return Response.status(400).entity(ex.getMessage()).build();
+            return Response.status(400).entity(new MessageDTO(ex.getMessage())).build();
         }
 
-        return Response.status(200).entity("Translation has been updated").build();
+        return Response.status(200).entity(new MessageDTO("Translation has been updated")).build();
     }
 
 }
