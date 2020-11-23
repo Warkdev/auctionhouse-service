@@ -2,7 +2,7 @@ package eu.getmangos.controllers;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,11 +13,13 @@ import org.slf4j.Logger;
 
 import eu.getmangos.entities.Auction;
 
-@RequestScoped
+@ApplicationScoped
 public class AuctionController {
     @Inject private Logger logger;
 
-    @PersistenceContext(name = "CHAR_PU")
+    @Inject private AuctionHouseController auctionHouseController;
+
+    @PersistenceContext(unitName = "CHAR_PU")
     private EntityManager em;
 
     /**
@@ -28,6 +30,10 @@ public class AuctionController {
     @Transactional
     public void create(Auction auction) throws DAOException {
         logger.debug("create() entry.");
+
+        if(auctionHouseController.find(auction.getHouseid()) == null) {
+            throw new DAOException("Auction House does not exist");
+        }
 
         try {
             em.persist(auction);
@@ -50,6 +56,10 @@ public class AuctionController {
 
         if(find(auction.getId()) == null) {
             throw new DAOException("Entity does not exist");
+        }
+
+        if(auctionHouseController.find(auction.getHouseid()) == null) {
+            throw new DAOException("Auction House does not exist");
         }
 
         try {

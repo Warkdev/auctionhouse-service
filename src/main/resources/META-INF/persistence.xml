@@ -9,4 +9,12 @@
             <property name="eclipselink.jdbc.batch-writing.size" value="100"/>
         </properties>
     </persistence-unit>
+    <persistence-unit name="DBC_PU" transaction-type="JTA">
+        <jta-data-source>jdbc/DBCDBDS</jta-data-source>
+        <properties>
+            <property name="eclipselink.target-database" value="MySQL"/>
+            <property name="eclipselink.jdbc.batch-writing" value="jdbc"/>
+            <property name="eclipselink.jdbc.batch-writing.size" value="100"/>
+        </properties>
+    </persistence-unit>
 </persistence>
