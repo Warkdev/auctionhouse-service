@@ -117,7 +117,7 @@ public interface AuctionResource {
     )
     @APIResponses(
         value = {
-            @APIResponse(responseCode = "200", description = "The auction has been created"),
+            @APIResponse(responseCode = "200", description = "The auction has been updated"),
             @APIResponse(responseCode = "400", description = "Error with the request"),
             @APIResponse(responseCode = "500", description = "An unexpected event occured")
         }
