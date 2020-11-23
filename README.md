@@ -2,8 +2,9 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This project is educational, this is a Rest API based on [Mangos Character Database](https://github.com/mangoszero/database), it provides access to the database through web calls and allows to manage Mangos Auction Houses for a given realm:
+This project is educational, this is a Rest API based on [Mangos Character Database](https://github.com/mangoszero/database) and on the DBC Zero Database (to be created manually), it provides access to the database through web calls and allows to manage Mangos Auction Houses for a given realm:
 - Auctions
+- Auction Houses
 
 # OpenAPI
 
