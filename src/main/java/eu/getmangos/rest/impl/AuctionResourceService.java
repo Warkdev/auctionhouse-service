@@ -63,10 +63,13 @@ public class AuctionResourceService implements AuctionResource {
 
         try {
             AuctionDTO auction = auctionMapper.auctionToDTO(auctionController.find(id));
+            if(auction == null) {
+                return Response.status(404).entity(new MessageDTO("Auction doesn't exist")).build();
+            }
             return Response.status(200).entity(auction).build();
         } catch (DAOException dao) {
             logger.debug("finfindAuctiondAll() exit.");
-            return Response.status(404).build();
+            return Response.status(500).entity(new MessageDTO(dao.getMessage())).build();
         }
 
     }
@@ -144,7 +147,7 @@ public class AuctionResourceService implements AuctionResource {
         } catch (Exception ex) {
                 return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
-        return Response.status(201).entity("Auction has been created.").build();
+        return Response.status(201).entity(new MessageDTO("Auction has been created.")).build();
     }
 
     @Override
@@ -158,7 +161,7 @@ public class AuctionResourceService implements AuctionResource {
         } catch (Exception ex) {
                 return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
-        return Response.status(200).entity("Auction has been updated.").build();
+        return Response.status(200).entity(new MessageDTO("Auction has been updated.")).build();
     }
 
     @Override
@@ -170,7 +173,7 @@ public class AuctionResourceService implements AuctionResource {
         } catch (Exception ex) {
                 return Response.status(500).entity(new MessageDTO(ex.getMessage())).build();
         }
-        return Response.status(204).build();
+        return Response.status(204).entity(new MessageDTO("Auction has been deleted.")).build();
     }
 
 }

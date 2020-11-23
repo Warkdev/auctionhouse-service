@@ -68,10 +68,13 @@ public class AuctionHouseResourceService implements AuctionHouseResource {
         try {
             AuctionHouseDTO auction = auctionHouseMapper.map(auctionHouseController.find(houseId));
             logger.debug("findAuctionHouse() exit.");
+            if(auction == null) {
+                return Response.status(404).entity(new MessageDTO("Auction House doesn't exist")).build();
+            }
             return Response.status(200).entity(auction).build();
         } catch (DAOException dao) {
             logger.debug("findAuctionHouse() exit.");
-            return Response.status(404).build();
+            return Response.status(400).entity(new MessageDTO(dao.getMessage())).build();
         }
     }
 
