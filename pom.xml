@@ -18,7 +18,7 @@
     <!-- MapStruct -->
     <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
     <!-- MariaDB Library -->
-	<version.mariadb>2.7.0</version.mariadb>
+	<version.mariadb>2.7.3</version.mariadb>
 	<mariadb.path>C:/Users/Cedri/.m2/repository/org/mariadb/jdbc/mariadb-java-client</mariadb.path>
 	<!-- Liberty configuration -->
 	<liberty.var.default.http.port>8081</liberty.var.default.http.port>
